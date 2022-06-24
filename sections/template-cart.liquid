@@ -1,0 +1,71 @@
+{{ 'template-cart.js' | asset_url | script_tag }} 
+
+<section class="cart__section">
+    <div class="cart__container">
+        <h2>Mon panier</h2>
+        {% if cart.item_count == 0 %}
+            <h5 class="cart-empty">Votre panier est vide</h5>
+        {% else %}
+            <div class="table">
+                <div class="thead">
+                    <div>&nbsp;</div>
+                    <div>&nbsp;</div>
+                    <div>Quantité</div>
+                    <div>Prix</div>
+                    <div>Action</div>
+                </div>
+                <div class="product-container">
+                    {% for item in cart.items %}
+                        <div class="product">
+                            <div class="product-image"><img src="{{ item.image | image_url: width: 150 }}"></div>
+                            <div class="product-content">
+                                <div class="product-title">{{ item.title }}</div>
+                                <div class="product-quantity-container">
+                                    <div class="product-quantity">
+                                        <input type="button" id="button-minus-{{ item.id }}" class="button-minus" value="-" />
+                                        <input id="{{ item.id }}" class="quantity" name="quantity" type="number" min="1" max="9" step="1" value="{{ item.quantity }}" />
+                                        <input type="button" id="button-plus-{{ item.id }}" class="button-plus" value="+" />
+                                    </div>
+                                </div>
+                                <div class="product-final-price">{{item.final_line_price | money | remove: '€' | remove: '.'}} €</div>
+                                <div class="product-remove"><a href="{{ item.url_to_remove }}">X</a></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+            </div>
+            <div class="cart__validation-container">
+                <div class="validation-summary-container">
+                    <span class="validation-summary-title">Résumé de la commande</span>
+                    <div class="validation-summary">
+                        <span>Total :</span>
+                        <h3>{{ cart.total_price | money | remove: '€' | remove: '.' }} €</h3>
+                    </div>
+                </div>
+                <div class="validation-condition">
+                    <div class="illustration">
+                        <img src="{{ 'illustration-cart1.svg' | asset_url }}" />
+                    </div>
+                    <p>Sans engagement</p>
+                </div>
+                <div class="validation-condition">
+                    <div class="illustration">
+                        <img src="{{ 'illustration-cart2.svg' | asset_url }}"/>
+                    </div>
+                    <p>Point relais ou à domicile </p>
+                </div>
+                <div class="validation-condition">
+                    <div class="illustration">
+                        <img src="{{ 'illustration-cart3.svg' | asset_url }}"/>
+                    </div>
+                    <p>Livraison offerte en point relais</p>
+                </div>
+                <div class="validation-button">
+                    <button>
+                        <a href="/checkout">Valider le panier</a>
+                    </button>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>

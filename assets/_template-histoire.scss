@@ -1,0 +1,100 @@
+.histoire {
+    &__video {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        height: 100vh;
+        background-size: cover;
+        background-image: url("./histoire-medium.png");
+
+        &-title {
+            color: var(--white-color);
+            left: 15%;
+            font-family: var(--title-font-family);
+            font-size: 60px;
+            text-transform: uppercase;
+
+            @media screen and (max-width: 576px) {
+                font-size: 40px;
+            }
+        }
+    }
+
+    &__content {
+        position: relative;
+        min-height: calc(100vh - 80px);
+        background-color: var(--primary-color);
+
+        @media screen and (max-width: 768px) {
+            height: auto;
+            padding: 40px 0;
+        }
+
+        &::after {
+            content: '';
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 101;
+            width: 100%;
+            height: 100%;
+            background-image: url("./background-noise.png");
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        &-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 0;
+
+            @media screen and (max-width: 1050px) {
+                width: 70%;
+                max-width: auto;
+            }
+
+            @media screen and (max-width: 768px) {
+                width: 90%;
+                padding: 0;
+            }
+
+            p {
+                color: white;
+                font-family: var(--text-font-family);
+                margin-top: 30px;
+                line-height: 1.6;
+            }
+        }
+
+        &-box {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-bottom: 80px;
+
+            @media screen and (max-width: 1050px) {
+                width: 70%;
+                max-width: auto;
+                flex-direction: column;
+            }
+
+            @media screen and (max-width: 768px) {
+                width: 90%;
+                padding: 0;
+            }
+
+            img {
+                width: 400px;
+
+                @media screen and (max-width: 1050px) {
+                    width: 100%;
+                    margin-top: 30px;
+                }
+            }
+        }
+    }
+
+}

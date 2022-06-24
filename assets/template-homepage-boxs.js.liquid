@@ -1,0 +1,126 @@
+document.addEventListener('DOMContentLoaded', () => {
+
+    gsap.to(".img-cork", {
+        scrollTrigger: {
+            trigger:".details-container",
+            scrub: .5
+        }, 
+        y: (i, target) => -ScrollTrigger.maxScroll(window) * target.dataset.speed,
+        ease: "none"
+    });
+  gsap.registerPlugin(ScrollTrigger);
+
+//     // var sliderImages = gsap.utils.toArray('.horizontal-slider .box');
+
+//     // var getTotalWidth = () => {
+//     // totalWidth = 0;
+//     // sliderImages.forEach((image) => {
+//     //     totalWidth += image.offsetWidth;
+//     // });
+//     // };
+
+//     // getTotalWidth();
+//     // ScrollTrigger.addEventListener('refreshInit', getTotalWidth);
+
+//     // gsap.to(sliderImages, {
+//     // scrollTrigger: {
+//     //     trigger: '.content',
+//     //     start: 'top top',
+//     //     end: () => `+=${totalWidth}`,
+//     //     pin: true,
+//     //     scrub: true,
+//     //     invalidateOnRefresh: true
+//     // },
+//     // x: () => `-${totalWidth - document.documentElement.clientWidth}`
+//     // });
+
+      const canvas = document.getElementById("bottle-canvas");
+      const context = canvas.getContext("2d");
+    
+      canvas.width = 1500;
+      canvas.height = 1500;
+    
+      const frames = [
+        "{{ 'bottle-001.png' | asset_url }}",
+        "{{ 'bottle-002.png' | asset_url }}",
+        "{{ 'bottle-003.png' | asset_url }}",
+        "{{ 'bottle-004.png' | asset_url }}",
+        "{{ 'bottle-005.png' | asset_url }}",
+        "{{ 'bottle-006.png' | asset_url }}",
+        "{{ 'bottle-007.png' | asset_url }}",
+        "{{ 'bottle-008.png' | asset_url }}",
+        "{{ 'bottle-009.png' | asset_url }}",
+        "{{ 'bottle-0010.png' | asset_url }}",
+        "{{ 'bottle-0011.png' | asset_url }}",
+        "{{ 'bottle-0012.png' | asset_url }}",
+        "{{ 'bottle-0013.png' | asset_url }}",
+        "{{ 'bottle-0014.png' | asset_url }}",
+        "{{ 'bottle-0015.png' | asset_url }}",
+        "{{ 'bottle-0016.png' | asset_url }}",
+        "{{ 'bottle-0017.png' | asset_url }}",
+        "{{ 'bottle-0018.png' | asset_url }}",
+        "{{ 'bottle-0019.png' | asset_url }}",
+        "{{ 'bottle-0020.png' | asset_url }}",
+        "{{ 'bottle-0021.png' | asset_url }}",
+        "{{ 'bottle-0022.png' | asset_url }}",
+        "{{ 'bottle-0023.png' | asset_url }}",
+        "{{ 'bottle-0024.png' | asset_url }}",
+        "{{ 'bottle-0025.png' | asset_url }}",
+        "{{ 'bottle-0026.png' | asset_url }}",
+        "{{ 'bottle-0027.png' | asset_url }}",
+        "{{ 'bottle-0028.png' | asset_url }}",
+        "{{ 'bottle-0029.png' | asset_url }}",
+        "{{ 'bottle-0030.png' | asset_url }}",
+      ];
+    
+      const images = []
+      const airpods = {
+        frame: 1
+      };
+    
+      for (let i = 0; i < frames.length; i++) {
+        let index = i+1;
+        const img = new Image();
+        img.src = frames[index];
+        images.push(img);
+      }
+    
+      gsap.to(airpods, {
+        frame: frames.length - 1,
+        snap: "frame",
+        ease: "none",
+        yoyo: true,
+        scrollTrigger: {
+          trigger: ".bottle-container",
+          scrub: .2, 
+          pin: true,
+          start: "top top",
+          end: "+=500"
+        },
+        onUpdate: render
+      });
+    
+      images[0].onload = render;
+    
+      function render() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(images[airpods.frame -1], 0, 0);
+        
+      }
+      
+      let sections = gsap.utils.toArray(".season-box");
+      
+      gsap.to(sections, {
+        xPercent: -100 * (sections.length - 1),
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".season-box-container",
+          pin: true,
+          scrub: 1,
+          snap: 1 / (sections.length - 1),
+          // base vertical scrolling on how wide the container is so it feels more natural.
+          end: "+=3500",
+        }
+      });
+
+});

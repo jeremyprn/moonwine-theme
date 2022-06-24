@@ -1,0 +1,148 @@
+{{ 'template-abonnements.js' | asset_url | script_tag }}
+
+<div class="abonnements">
+    <div class="abonnements__hero">
+        <div class="abonnements__filters">
+            <div class="abonnements__filters-choices">
+                <div data-name="Basic" class="abonnements__filters-choice">Basic</div>
+                <div data-name="Premium" class="abonnements__filters-choice active">Premium</div>
+                <div data-name="Explorer" class="abonnements__filters-choice">Explorer</div>
+            </div>
+        </div>
+
+        {% for product in collection.products %}
+            <div data-name="{{ product.title }}" class="{{ product.title }} product-hidden">
+                <div class="abonnements__product">
+                    <div class="abonnements__product-img-container">
+                        <img src="{{ product.featured_image.src | img_url: 'large' }}" />
+                    </div>
+        
+                    <div class="abonnements__product-informations">
+                        <div class="abonnements__product-title">
+                            {{ product.title }}
+                        </div>
+
+                        <div class="abonnements__product-price-informations">
+                            <span class="abonnements__product-price">
+                                {{ product.price | money_without_currency }} €
+                            </span> 
+                            <span class="abonnements__product-price-small">
+                                / MOIS ({{ product.price | times: 12 | money_without_currency}} €/an) <br /> 
+                            </span>
+
+                            <div class="abonnements__product-price-small-both">
+                                (Hors livraison) sur 12 mois
+                            </div>
+
+                            <div class="abonnements__product-content">
+                                {{ product.content }}
+                            </div>
+                            
+                            <form method="post" action="/cart/add">
+                                <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                                <input type="hidden" id="quantity" name="quantity" value="1" />
+                                <input class="abonnement__submit" type="submit" value="Ajouter au panier" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="abonnements__trending">
+        <div class="abonnements__trending-container">
+            {% for product in collections['box'].products %}
+                {% if product.tags contains 'Trending' %}
+                    <div class="abonnements__trending-bottles">
+                        {% for image in product.images %}
+                            <img src="{{ image | img_url: 'large' }}" />
+                        {% endfor %}
+                    </div>
+            
+                    <div class="abonnements__trending-informations">
+                        <div class="abonnements__trending-title">{{ product.title }}</div>
+
+                        <div class="abonnements__trending-partenariat">{{ product.metafields.custom.partenariat }}</div>
+
+                        <div class="abonnements__trending-price">{{ product.price | money_without_currency }} €</div>
+
+                        <div class="abonnements__trending-description">{{ product.content }}</div>
+
+                        <form method="post" action="/cart/add">
+                            <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                            <input type="hidden" id="quantity" name="quantity" value="1" />
+                            <input class="abonnement__submit" type="submit" value="Ajouter au panier" />
+                        </form>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="abonnements__last">
+        <div class="abonnements__last-container">
+            <span class="abonnements__last-title">
+                VOIR LE CONTENU DES ANCIENNES BOX
+            </span>
+
+            <div class="abonnements__last-boxes">
+                {% assign i = 0 %}
+                {% for product in collections['ancienne-box'].products %}
+                    {% if i < 3 %}
+                        <a href="{{ product.url }}" class="abonnements__last-box">
+                            <span>{{ product.title }}</span>
+                            {% render 'icon-arrow-right' %}
+                        </a>
+                    {% endif %}
+                    {% assign i = i | plus: 1 %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="abonnements__club">
+        {% render 'icon-moon' %}
+
+        <span class="abonnements__club-title">Moonwine club</span>
+
+        <div class="abonnements__club-description">
+            En souscrivant un abonnement à Moon Wine vous entrez dans le Moon Wine Club. Tous nos choix de bouteilles et de vignerons renferment selon nous une histoire toute particulière que nous souhaitons vous transmettre avec passion. En adhérant à Moon Wine vous soutenez le travail de chacun, vous partagez les gorgées de ce breuvage qui traversent nos civilisations.
+            <br /> <br />Tous les membres du Moon Wine Club auront accès à la cave Moon Wine où vous pourrez retrouver certaines cuvées exclusives, des vins qui ne sortiront jamais en box, des goodies, des oeuvres des artistes en tirages limitées, des bons plans et plein de surprises.
+        </div>
+    </div>
+
+    <div class="abonnements__cave">
+        <div class="abonnements__cave-container">
+            <span class="abonnements__cave-subtitle">Notre cave exclusive</span>
+            <div class="abonnements__cave-title">Une sélection de vin unique pour un voyage gustatif</div>
+
+            <div class="abonnements__cave-products">
+                {% assign i = 0 %}
+                {% for product in collections['cave-exclusive'].products %}
+                    {% if i < 3 %}
+                        <div class="abonnements__cave-product">
+                            <div class="abonnements__cave-product-img">
+                                <img src="{{ product.featured_image.src | img_url: 'medium' }}" />
+                            </div>
+
+                            <div class="abonnements__cave-product-title">
+                                {{ product.title }}
+                            </div>
+
+                            <div class="abonnements__cave-product-more">
+                                <a href="{{ product.url }}">En savoir +</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% assign i = i | plus: 1 %}
+                {% endfor %}
+            </div>
+
+            <a class="visit" href="/collections/cave-exclusive">VISITER NOTRE CAVE EXCLUSIVE</a>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+</div>

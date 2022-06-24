@@ -1,0 +1,89 @@
+{{ 'template-exclusive.js' | asset_url | script_tag }}
+
+<div class="exclusive">
+    <div class="exclusive__header">
+       <div class="exclusive__header-content">
+            <div class="exclusive__header-content-container">
+                <div class="exclusive__header-texts">
+                    <img class="exclusive__header-cork" src="{{ 'object-bottle.svg' | asset_url }}" />
+                    <span class="exclusive__header-subtitle">Notre</span>
+                    <span class="exclusive__header-title">Cave exclusive</span>
+                </div>
+
+                <div class="exclusive__header-bottles">
+                    <img class="exclusive__header-bottles-img" src="{{ 'object-bottles.svg' | asset_url }}" />
+                </div>
+            </div>
+       </div>
+    </div>
+
+    <div class="exclusive__content">
+        <div class="exclusive__content-actions">
+            <div class="exclusive__content-actions-title">NOS DERNIÈRES CUVÉES</div>
+            
+            <div class="exclusive__content-actions-filters">
+                <div class="exclusive__sorts">
+                    <div class="exclusive__sorts-title">
+                        Filtrer les produits {% render 'icon-arrow-down' %}
+                    </div>
+
+                    <div class="exclusive__sorts-dropdown">
+                        <ul>
+                            <li data-sort="" class="item-sorts">Tous</li>
+                            <li data-sort="price-ascending" class="item-sorts">Prix croissant</li>
+                            <li data-sort="price-descending" class="item-sorts">Prix décroissant</li>
+                        </ul> 
+                    </div>
+                </div>
+
+                <div class="exclusive__categories">
+                    <div class="exclusive__categories-title">
+                        Catégories {% render 'icon-arrow-down' %}
+                    </div>
+
+                    <div class="exclusive__categories-dropdown">
+                        <ul>
+                            <li data-type="" class="item-categories">Tous</li>
+                            <li data-type="rouge" class="item-categories">Vins rouges</li>
+                            <li data-type="blanc" class="item-categories">Vins blancs</li>
+                            <li data-type="orange" class="item-categories">Vins oranges</li>
+                        </ul> 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="exclusive__products">
+            {% for product in collection.products %}
+        
+                {% if product.variants.first.inventory_quantity > 0 %}
+                    <div class="exclusive__product">
+                        <a href="{{ product.url }}" class="exclusive__product-box">
+                            <img src="{{ product.featured_image.src | img_url: 'medium' }}" />
+                        </a>
+    
+                        <div class="exclusive__product-informations">
+                            <a href="{{ product.url }}" class="exclusive__product-title">{{ product.title }}</a>
+                            <a href="{{ product.url }}" class="exclusive__product-price">{{ product.price | remove: '00' }} € </a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="exclusive__product product-empty">
+                        <span class="product-empty-label">Rupture de stock</span>
+
+                        <a href="{{ product.url }}" class="exclusive__product-box">
+                            <img src="{{ product.featured_image.src | img_url: 'medium' }}" />
+                        </a>
+
+                        <div class="exclusive__product-informations">
+                            <a href="{{ product.url }}" class="exclusive__product-title">{{ product.title }}</a>
+                            <a href="{{ product.url }}" class="exclusive__product-price">{{ product.price | remove: '00' }} € </a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+

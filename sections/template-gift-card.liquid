@@ -1,0 +1,46 @@
+{{ 'template-product.js' | asset_url | script_tag }} 
+
+<section class="gift-card__section">
+    <div class="gift-card__container">
+        <div class="gift-card__container-left">
+            <h2>{{ product.title }}</h2>
+            <h3>Pour soi ou à offir !</h3>
+            <p>Sélectionnez un montant pour votre carte cadeaux</p>
+            {{ product.description }}
+            <form action="/cart/add" method="post" enctype="multipart/form-data">
+                <div class="amount-container">
+                {% for variant in product.variants %}
+                    {% if variant.available == true %}
+                        <div class="amount">
+                            <input type="radio" name="amount" id="{{variant.id}}" />
+                            <label for="{{variant.id}}">{{ variant.title }}</label>
+                        </div>
+                    {% else %}
+                        <div class="amount">
+                            <input type="radio" name="amount" id="{{variant.id}}" disabled>
+                            <label for="{{variant.id}}">{{ variant.title }} - sold out!</label>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                </div>
+                <div class="actions">
+                    <div class="quantity-container">
+                        <input type="button" id="button-minus" value="-" />
+                        <input id="quantity" type="number" min="1" max="9" step="1" value="1" />
+                        <input type="button" id="button-plus" value="+" />
+                    </div>
+                    <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                    <input type="submit" name="add" id="add" value="Ajouter au panier">
+                </div>
+            </form>
+        </div>
+        <div class="gift-card__container-right">
+            <img src="{{ 'img-gift-card.png' | asset_url }}" />
+        </div>
+        
+    </div>
+    <div class="gift-card__infos">
+
+    </div>
+    
+</section>

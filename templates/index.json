@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "template-warning": {
+      "type": "template-warning"
+    },
+    "template-index": {
+        "type": "template-index"
+    },
+    "template-homepage-boxs": {
+      "type": "template-homepage-boxs"
+    }
+  },
+  "order": [
+    "template-warning",
+    "template-index",
+    "template-homepage-boxs"
+  ]
+}

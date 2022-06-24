@@ -1,0 +1,164 @@
+{{ 'template-homepage-boxs.js' | asset_url | script_tag }}
+
+<section class="boxs-container">
+    <div class="content">
+        <div class="infos">
+            <h4>{{ section.settings.concept }}</h4>
+            <h3>{{ section.settings.title }}</h3>
+            <p>{{ section.settings.description }}</p>
+            <button>
+                <a href="/collections/abonnements">découvrir les abonnements</a>
+            </button>
+        </div>
+
+        <div class="horizontal-slider">
+            {% assign collection_handle = 'boxs' %}
+            {% for product in collections[collection_handle].products %}
+                <a href="{{ product.url }}" class="box">
+                    <img src="{{ product | image_url: width: 150 }}">
+                </a>
+            {% endfor %}
+        </div>
+
+        <div class="details-container">
+            <h4>NOTRE UNIVERS EST LE VÖTRE</h4>
+            <h3>immergez dans l’univers du vin</h3>
+            <p>Nos vin, nos vignerons et nos artistes se retrouvent autour de 3 grandes valeurs : l’engagement,
+                 l’authenticité, et la créativité. Le vin est une histoire de passion, ivez une expérience unique
+                  à travers une sélection de vins biologiques et qui vous ressemble.</p>
+            <div class="illustration-1"></div>
+            <div class="illustration-2"></div>
+            <div class="illustration-3"></div>
+            <div class="img-cork" data-speed=".10"></div>
+        </div>
+        <div class="bottle-container">
+            <h4>Un peu plus proche de chez vous...</h4>
+            <h3>entre terre et ciel</h3>
+            <div class="description-container">
+                <div class="description">
+                    <div class="logo">
+                        {% capture image_size %}{{ section.settings.logo_max_width | escape }}{% endcapture %}
+                        <img src="{{ 'illustration-glass-of-wine.svg' | asset_url }}" >
+                    </div>
+                    <h4 class="title">un vin 100% bio</h4>
+                    <p class="details">Tous nos vins sont certifiés biodynamiques : aucun ajout, aucun retrait, aucune modification</p>
+                </div>
+                <div class="description">
+                    <div class="logo">
+                        {% capture image_size %}{{ section.settings.logo_max_width | escape }}{% endcapture %}
+                        <img src="{{ 'illustration-infinity.svg' | asset_url }}" >
+                    </div>
+                    <h4 class="title">une créativité sans limites</h4>
+                    <p class="details">Toutes nos étiquettes sont réalisées en collaboration avec des artistes uniques et ayant la main libre sur toutes leurs créations.</p>
+                </div>
+                <div class="description">
+                    <div class="logo">
+                        {% capture image_size %}{{ section.settings.logo_max_width | escape }}{% endcapture %}
+                        <img src="{{ 'illustration-validate.svg' | asset_url }}" >
+                    </div>
+                    <h4 class="title">des vignerons engagés</h4>
+                    <p class="details">Assurement, nos vins sont engagés. Tout simplement parce que nos vignerons le sont.</p>
+                </div>
+                <div class="description">
+                    <div class="logo">
+                        {% capture image_size %}{{ section.settings.logo_max_width | escape }}{% endcapture %}
+                        <img src="{{ 'illustration-leave.svg' | asset_url }}" >
+                    </div>
+                    <h4 class="title">tout pour l'environnement</h4>
+                    <p class="details">Assurement, nos vins sont engagés. Tout simplement parce que nos vignerons le sont.</p>
+                </div>
+            </div>
+            <div class="animation-container" data-speed=".05">
+                <canvas id="bottle-canvas"></canvas>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="abonnements__cave">
+        <div class="abonnements__cave-container">
+            <span class="abonnements__cave-subtitle">Notre cave exclusive</span>
+            <div class="abonnements__cave-title">Une sélection de vin unique pour un voyage gustatif</div>
+
+            <div class="abonnements__cave-products">
+                {% assign i = 0 %}
+                {% for product in collections['cave-exclusive'].products %}
+                    {% if i < 3 %}
+                        <div class="abonnements__cave-product">
+                            <div class="abonnements__cave-product-img">
+                                <img src="{{ product.featured_image.src | img_url: 'medium' }}" />
+                            </div>
+
+                            <div class="abonnements__cave-product-title">
+                                {{ product.title }}
+                            </div>
+
+                            <div class="abonnements__cave-product-more">
+                                <a href="{{ product.url }}">En savoir +</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% assign i = i | plus: 1 %}
+                {% endfor %}
+            </div>
+
+            <a class="visit" href="/collections/cave-exclusive">VISITER NOTRE CAVE EXCLUSIVE</a>
+        </div>
+    </div>
+
+    <div class="season-box-container">
+        <div class="season-box-content">
+            <div class="season-box">
+                <h2>à chaque saison, sa box exclusive.</h2>
+            </div>
+            <div class="season-box">
+                <h3>automne</h3>
+                <img src="{{ 'box-automne.png' | asset_url }}" >
+            </div>
+            <div class="season-box">
+                <h3>hiver</h3>
+                <img src="{{ 'box-hiver.png' | asset_url }}" >
+            </div>
+            <div class="season-box">
+                <h3>printemps</h3>
+                <img src="{{ 'box-printemps.png' | asset_url }}" >
+            </div>
+            <div class="season-box">
+                <h3>été</h3>
+                <img src="{{ 'box-ete.png' | asset_url }}" >
+            </div>
+            
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/ScrollTrigger.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
+</section>
+
+{% schema %}
+{
+    "name": "Homepage-boxs",
+    "settings": [
+        {
+            "type": "text",
+            "id": "concept",
+            "default": "notre concept",
+            "label": "Concept"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "default": "chaque box est unique   ",
+            "label": "Titre"
+        },
+        {
+            "type": "text",
+            "id": "description",
+            "default": "Rentrez dans l’univers Moonwine en sélectionnant l’un de nos 3 abonnements, spécialement conçues pour vous procurer une expérience unique et savoureuse.",
+            "label": "Description"
+        }
+    ]
+}
+{% endschema %}

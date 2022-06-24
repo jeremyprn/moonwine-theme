@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "template-list-collections": {
+      "type": "template-list-collections",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "template-list-collections"
+  ]
+}

@@ -1,0 +1,38 @@
+{{ 'template-warning.js' | asset_url | script_tag }} 
+
+<section class="warning">
+    <div class="warning__logo warning__logo--desktop">
+        {% render 'logo-moonwine' %}
+    </div>
+
+    <div class="warning__logo warning__logo--mobile">
+        {% render 'logo-moonwine-mobile' %}
+    </div>
+
+
+    <div class="warning__container">
+        <div class="warning__title">
+            Ravi de vous rencontrer. <br /> Avez-vous
+            <span class="warning__title--secondary">plus de 18 ans</span> ?
+        </div>
+    
+        <div class="warning__confirm">
+            <button class="warning__confirm-button">
+                Je confirme !
+            </button>
+        </div>
+    
+        <div class="warning__disagree">
+            <a class="warning__disagree-link" href="https://google.fr">Non, je suis mineur</a>
+        </div>
+    </div>
+  
+    <div class="privacy">
+      En cliquant sur le bouton, vous acceptez notre
+      <a class="privacy__link" href="#">politique de confidentialité</a>
+      et confirmez que vous remplissez les conditions établies par la loi de
+      votre pays, c'est-à-dire que vous avez l'âge légal pour naviguer ici.
+      Cette page expose des données sur la responsabilité de la consommation
+      dont boire avec modération.
+    </div>
+</section>

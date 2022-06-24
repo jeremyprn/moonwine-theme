@@ -1,0 +1,155 @@
+{{ 'header.js' | asset_url | script_tag }} 
+
+<header class="header">
+    <div class="header__menu">
+        <div class="header__menu-actions">
+            <div class="header__menu-actions--toggle">
+                {% render 'icon-close' %}
+            </div>
+
+            <select class="header__menu-actions--languages">
+                <option value="fr">FR</option>
+                <option value="en">EN</option>
+            </select>
+        </div>
+
+        <div class="header__menu-container">
+            <nav class="header__menu-navigation">
+                <ul class="header__menu-list">
+                    {% assign main_menu_linklist = section.settings.menu.links %}
+
+                    {% for link in main_menu_linklist %}    
+                        <li class="header__menu-item"><a class="header__menu-link" href="{{ link.url }}">{{ link.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+
+            <div class="header__menu-socials">
+                <a href="{{ section.settings.facebook }}" class="header__menu-social">{% render 'icon-facebook' %}</a>
+                <a href="{{ section.settings.youtube }}" class="header__menu-social">{% render 'icon-youtube' %}</a>
+                <a href="{{ section.settings.linkedin }}" class="header__menu-social">{% render 'icon-linkedin' %}</a>
+                <a href="{{ section.settings.instagram }}" class="header__menu-social">{% render 'icon-instagram' %}</a>
+            </div>
+        </div>
+
+        <a href="{{ routes.root_url }}" class="header__menu-logo--desktop">
+            {% render 'logo-moonwine' %}
+        </a>
+
+        <a href="{{ routes.root_url }}" class="header__menu-logo--mobile">
+            {% render 'logo-moonwine-mobile' %}
+        </a>
+    </div>
+
+    <div class="header__container">
+        <!-- Toggle -->
+        <div class="header__menu-toggle">
+            {% render 'icon-burger' %}
+        </div>
+
+        <div class="header__menu-toggle--mobile">
+            <div class="header__menu-toggle--mobile-container">
+                {% render 'icon-burger' %}
+            </div>
+
+            <a href="{{ routes.root_url }}">
+                {% render 'logo-moonwine-mobile' %}
+            </a>
+        </div>
+
+        <!-- Logo -->
+        <div class="header__menu-logo">
+            <a href={{ routes.root_url }}>
+                {% render 'logo-moonwine' %}
+            </a>
+        </div>
+    
+        <!-- Actions -->
+        <div class="header__actions">
+            <span class="header__search-icon">{% render 'icon-search' %}</span>
+
+            {% if shop.customer_accounts_enabled %}
+                {% if customer %}
+                    <a href="{{ routes.account_url }}">
+                        {% render 'icon-account' %}
+                    </a>
+
+                    <a href="{{ routes.account_logout_url }}">
+                        {% render 'icon-logout' %}
+                    </a>
+                {% endif %}
+
+                {% unless customer %}
+                    <a href="{{ routes.account_login_url }}">
+                        {% render 'icon-account' %}
+                    </a>
+                {% endunless %}
+            {% endif %}
+
+            <a class="header__cart" href="{{ routes.cart_url }}">
+                {% render 'icon-shopping-bag' %}
+                <div class="cart-count">
+                    ({{ cart.item_count }})
+                </div>
+            </a>
+        </div>
+    </div>
+</header>
+
+<div class="search-overlay">
+    <div class="search-overlay-container">
+        <form action="{{ routes.search_url }}" method="GET">
+            <div>
+                <input type="text" name="q" placeholder="RECHERCHER">
+            </div>
+        </form>
+
+        <div class="search-overlay-links">
+            <span class="search-overlay-links-title">Liens utiles</span>
+
+            <ul class="search-overlay-links-list">
+                <li><a class="search-overlay-links-link" href="#">Abonnement des box</a></li>
+                <li><a class="search-overlay-links-link" href="#">Notre histoire</a></li>
+                <li><a class="search-overlay-links-link" href="#">Vins rouges</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Header",
+    "settings": [
+        {
+            "type": "link_list",
+            "id": "menu",
+            "default": "main-menu",
+            "label": "Menu de navigation"
+        }, 
+        {
+            "type": "text",
+            "id": "facebook",
+            "default": "https://facebook.com",
+            "label": "Lien du profil Facebook"
+        },
+        {
+            "type": "text",
+            "id": "youtube",
+            "default": "https://youtube.com",
+            "label": "Lien du profil YouTube"
+        },
+        {
+            "type": "text",
+            "id": "linkedin",
+            "default": "https://linkedin.com",
+            "label": "Lien du profil LinkedIn"
+        },
+        {
+            "type": "text",
+            "id": "instagram",
+            "default": "https://instagram.com/",
+            "label": "Lien du profil Instagram"
+        }
+    ]
+}
+{% endschema %}

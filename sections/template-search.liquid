@@ -1,0 +1,31 @@
+<div class="search">
+  {% paginate search.results by 10 %}
+      <h1 class="search__title">Résultat(s) de la recherche</h1>
+
+      <div>
+          <form action="{{ routes.search_url }}" method="GET">
+              <input class="search__input" type="text" name="q" placeholder="Rechercher" value="{{ search.terms | escape }}" >
+              <button class="search__submit" type="submit">Rechercher</button>
+          </form>
+      </div>
+
+      {% if search.performed %}
+          {% if search.results.size > 0 %}
+              <div class="search__results">
+                {% for item in search.results %}
+                    {% case item.object_type %}
+                        {% when 'product' %}
+                            {% render 'template-search', product_product: item %}
+                        {% else %}
+                    {% endcase %}
+                {% endfor %}  
+              </div>
+              
+          {% else %}
+              <div class="search__empty">
+                  <p>Pas de résultats pour la recherche : {{ search.terms | escape }}.</p>
+              </div>
+          {% endif %}
+      {% endif %}
+  {% endpaginate %}
+</div>

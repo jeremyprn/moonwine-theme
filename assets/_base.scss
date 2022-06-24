@@ -1,0 +1,37 @@
+@font-face {
+    font-family: "Molgak";
+    src: url("./Molgak.woff") format("woff");
+}
+
+@font-face {
+    font-family: "Neutra";
+    src: url("./Neutra.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Now";
+    src: url("./Now.woff2") format("woff2");
+}
+
+*, ::before, ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--primary-color);
+}
+
+body.warning,
+body.menu-active {
+    overflow: hidden;
+}
+
+main {
+    padding-top: 80px;
+}
+
+main.no-padding {
+    padding-top: 0;
+}

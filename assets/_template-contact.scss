@@ -1,0 +1,79 @@
+.contact {
+    min-height: calc(100vh - 80px);
+    background-image: url("./contact.svg");
+    background-repeat: no-repeat;
+
+    @media screen and (max-width: 768px) {
+        min-height: auto;
+    }
+
+    &__container {
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 80px 0;
+
+        @media screen and (max-width: 1050px) {
+            width: 70%;
+            max-width: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            width: 90%;
+            padding: 40px 0;
+        }
+    }
+
+    &__title {
+        font-size: 60px;
+        color: var(--primary-color);
+        font-family: var(--title-font-family);
+        text-transform: uppercase;
+
+        @media screen and (max-width: 768px) {
+            text-align: center;
+        }
+    }
+    
+    &__means {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 60px;
+        margin-top: 30px;
+    }
+
+    &__mean {
+        text-align: center;
+
+        &-title {
+            font-size: 34px;
+            color: var(--primary-color);
+            font-family: var(--title-font-family);
+            text-transform: uppercase;
+        }
+
+        &-content {
+            margin-top: 6px;
+            font-size: 18px;
+            color: var(--primary-color);
+            font-family: var(--text-font-family);
+        }
+    }
+
+    &__map {
+        background-image: url("./map-tall.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 300px;
+
+        @media screen and (max-width: 1050px) {
+            display: none;
+        }
+
+        @media screen and (min-width: 1400px) {
+            display: none;
+        }
+    }
+}

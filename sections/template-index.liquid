@@ -1,0 +1,30 @@
+{{ 'template-index.js' | asset_url | script_tag }}
+
+<section class="homepage-container">
+    <div class="hero-container">
+        <div class="hero-title">
+            <h2>Une envie de déguster un vin unique et 100% bio ?</h2>
+        </div>
+        {% capture image_size %}{{ section.settings.logo_max_width | escape }}{% endcapture %}
+        <div class="cork-img" data-speed=".5"></div>
+        <div class="see_more-container">
+            {% capture image_size %}{{ section.settings.logo_max_width | escape }}{% endcapture %}
+            <img src="{{ 'icon-moon.svg' | asset_url }}" alt="{{ shop.name }}" >
+            <p>Explorez notre univers</p>
+            {% capture image_size %}{{ section.settings.logo_max_width | escape }}{% endcapture %}
+            <img src="{{ 'icon-arrow.svg' | asset_url }}" alt="{{ shop.name }}" >
+        </div>
+    </div>
+    <div class="hero-container-2">
+        <div class="hero-title">
+            <h2>des box de vins customisés par des artistes créatifs</h2>
+        </div>
+        <div class="animation-container">
+            <canvas id="canvas"></canvas>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/ScrollTrigger.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
+</section>

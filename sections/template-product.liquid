@@ -1,0 +1,154 @@
+{{ 'template-product.js' | asset_url | script_tag }} 
+
+<section class="product__section">
+    <div class="product__container">
+        <div class="product__container-left">
+            <h2>{{ product.title }}</h2>
+            <div class="product__information">
+                <h3>Producteur :</h3>
+                <p>
+                    {% if product.metafields.custom.producteur %}
+                        {{ product.metafields.custom.producteur }}
+                    {% else %}
+                        <i>Nom du producteur</i>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="product__information">
+                <h3>Composition :</h3>
+                <p>
+                    {% if product.metafields.custom.composition %}
+                        {{ product.metafields.custom.composition }}
+                    {% else %}
+                        <i>Liste de la composition</i>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="product__information">
+                <h3>Année :</h3>
+                <p>
+                    {% if product.metafields.custom.annee %}
+                        {{ product.metafields.custom.annee }}
+                    {% else %}
+                        <i>Année de la cuvée</i>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="product__information">
+                <h3>Artiste :</h3>
+                <p>
+                    {% if product.metafields.custom.artiste %}
+                        {{ product.metafields.custom.artiste }}
+                    {% else %}
+                        <i>Nom de l'artiste</i>
+                    {% endif %}
+                    
+                </p>
+            </div>
+            <!-- {% if product.variants.first.inventory_quantity > 0 %} -->
+                <form action="/cart/add" data-productid="{{product.id}}"  method="post" value="{{ product.id }}">
+                    <div class="actions">
+                        <div class="product__information-buy">
+                            <p>
+                                {% if product.metafields.custom.quantite %}
+                                    {{ product.metafields.custom.quantite }} cl
+                                {% else %}
+                                    <i>Quantité</i>
+                                {% endif %}
+                            </p>
+                            <h3>{{ product.price | money | remove: '€'  }}€</h3>
+                        </div>
+                        <div class="quantity-container">
+                            <input type="button" id="button-minus" value="-" />
+                            <input id="quantity" name="quantity" type="number" min="1" max="9" step="1" value="1" />
+                            <input type="button" id="button-plus" value="+" />
+                        </div>
+                        <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                        <input type="submit" name="checkout" value="Ajouter au panier">
+                    </div>
+                </form>
+            <!-- {% endif %} -->
+        </div>
+        <div class="product__container-right">
+            <img src="{{ product | image_url: width: 150 }}">
+        </div>
+    </div>
+    <div class="product__infos-container">
+        <button id="button-seeMore-down" class="active">
+            {% capture image_size %}{{ section.settings.logo_max_width | escape }}{% endcapture %}
+            <img src="{{ 'illustration-arrow-down.svg' | asset_url }}" alt="{{ shop.name }}" >
+            toutes les caractéristiques
+        </button>
+        <button id="button-seeMore-up">
+            {% capture image_size %}{{ section.settings.logo_max_width | escape }}{% endcapture %}
+            <img src="{{ 'illustration-arrow-up.svg' | asset_url }}" alt="{{ shop.name }}" >
+            Acheter
+        </button>
+        <div class="product__infos">
+            <h4>son histoire</h4>
+            <div class="product__type">
+                <div class="type">
+                    <h5>RÉGION</h5>
+                    <h3>
+                        {% if product.metafields.custom.region %}
+                            {{ product.metafields.custom.region }}
+                        {% else %}
+                            <i>Localisation</i>
+                        {% endif %}
+                    </h3>
+                </div>
+                <div class="type">
+                    <h5>SERVICE</h5>
+                    <h3>
+                        {% if product.metafields.custom.temperature %}
+                            {{ product.metafields.custom.temperature }}
+                        {% else %}
+                            <i>Température</i>
+                        {% endif %}
+                    </h3>
+                </div>
+                <div class="type">
+                    <h5>VARIété</h5>
+                    <h3>
+                        {% if product.metafields.custom.type_de_vin %}
+                            {{ product.metafields.custom.type_de_vin }}
+                        {% else %}
+                            <i>Type de vin</i>
+                        {% endif %}
+                    </h3>
+                </div>
+            </div>
+            <div class="product__see-more__content">
+                <h5>Description</h5>
+                <p>
+                    {% if product.description %}
+                        {{ product.description }}
+                    {% else %}
+                        <i>Description du vin</i>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="product__see-more__content">
+                <h5>Accompagnement</h5>
+                <p>
+                    {% if product.metafields.custom.accompagnement %}
+                        {{ product.metafields.custom.accompagnement }}
+                    {% else %}
+                        <i>Produit pour accompagner le vin</i>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="product__see-more__content">
+                <h5>Artiste</h5>
+                <p>
+                    {% if product.metafields.custom.artiste %}
+                        {{ product.metafields.custom.artiste }}
+                    {% else %}
+                        <i>Nom de l'artiste</i>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+    
+</section>

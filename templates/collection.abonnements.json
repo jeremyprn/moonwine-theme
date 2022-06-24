@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "template-abonnements": {
+      "type": "template-abonnements"
+    }
+  },
+  "order": [
+    "template-abonnements"
+  ]
+}

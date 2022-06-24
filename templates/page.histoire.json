@@ -1,0 +1,11 @@
+{
+    "sections": {
+      "template-histoire": {
+        "type": "template-histoire"
+      }
+    },
+    "order": [
+      "template-histoire"
+    ]
+  }
+  

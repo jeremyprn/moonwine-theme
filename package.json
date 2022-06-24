@@ -1,0 +1,25 @@
+{
+  "name": "ecv-moonwine-shopify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass:dev": "sass --no-source-map assets/main.scss assets/main.css",
+    "sass:watch": "sass --no-source-map --watch assets/main.scss assets/main.css",
+    "sass:build": "sass --no-source-map --style=compressed assets/main.scss assets/main.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeremyprn/moonwine-shopify.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeremyprn/moonwine-shopify/issues"
+  },
+  "homepage": "https://github.com/jeremyprn/moonwine-shopify#readme",
+  "dependencies": {
+    "sass": "^1.52.3"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "template-collection-banner": {
+      "type": "template-collection-banner",
+      "settings": {
+      }
+    },
+    "template-collection-grid": {
+      "type": "template-collection-grid",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "template-collection-banner",
+    "template-collection-grid"
+  ]
+}

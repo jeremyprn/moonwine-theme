@@ -1,0 +1,96 @@
+<footer class="footer">
+  <div class="footer__overlay"></div>
+
+  <div class="footer__logo">
+    <div class="footer__logo--desktop">
+      {% render 'logo-moonwine' %}
+    </div>
+
+    <div class="footer__logo--mobile">
+      {% render 'logo-moonwine-mobile' %}
+    </div>
+  </div>
+
+  <p class="footer__content"></p>
+
+  <div class="footer__socials">
+    <a href="{{ section.settings.facebook }}" class="footer__social">{% render 'icon-facebook' %}</a>
+    <a href="{{ section.settings.youtube }}" class="footer__social">{% render 'icon-youtube' %}</a>
+    <a href="{{ section.settings.linkedin }}" class="footer__social">{% render 'icon-linkedin' %}</a>
+    <a href="{{ section.settings.instagram }}" class="footer__social">{% render 'icon-instagram' %}</a>
+  </div>
+
+  <div class="footer__links">
+    <ul class="footer__links-list">
+
+      {% assign footer_linklist = section.settings.footer.links %}
+
+      {% for link in footer_linklist %}    
+        <li class="footer__links-item"><a class="footer__link" href="{{ link.url }}">{{ link.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="footer__end">
+    <div class="footer__contacts">
+      <div class="footer__contacts--phone">
+        <span class="footer__contacts-icon">
+          {% render 'icon-phone' %}
+        </span>
+        <div>
+          Téléphone <br /> +33 1 67 38 91 80
+        </div>
+      </div>
+
+      <div class="footer__contacts--email">
+        <span class="footer__contacts-icon">
+          {% render 'icon-email' %}
+        </span>
+        <div>
+          E-mail <br /> unreal@outlook.com
+        </div>
+      </div>
+    </div>
+    <div class="footer__copyrights">
+      &copy; 2022 Moonwine All rights reserved
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+    "name": "Footer",
+    "settings": [
+        {
+            "type": "link_list",
+            "id": "footer",
+            "default": "footer",
+            "label": "Menu de navigation du footer"
+        }, 
+        {
+            "type": "text",
+            "id": "facebook",
+            "default": "https://facebook.com",
+            "label": "Lien du profil Facebook"
+        },
+        {
+            "type": "text",
+            "id": "youtube",
+            "default": "https://youtube.com",
+            "label": "Lien du profil YouTube"
+        },
+        {
+            "type": "text",
+            "id": "linkedin",
+            "default": "https://linkedin.com",
+            "label": "Lien du profil LinkedIn"
+        },
+        {
+            "type": "text",
+            "id": "instagram",
+            "default": "https://instagram.com/",
+            "label": "Lien du profil Instagram"
+        }
+    ]
+}
+{% endschema %}

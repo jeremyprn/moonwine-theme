@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "template-exclusive": {
+      "type": "template-exclusive"
+    }
+  },
+  "order": [
+    "template-exclusive"
+  ]
+}

@@ -1,0 +1,86 @@
+document.addEventListener('DOMContentLoaded', () => {
+ 
+    gsap.to(".cork-img", {
+      scrollTrigger: {
+      scrub: true
+      }, 
+      y: (i, target) => -ScrollTrigger.maxScroll(window) * target.dataset.speed,
+      ease: "none"
+    });
+  
+    const canvas = document.getElementById("canvas");
+    const context = canvas.getContext("2d");
+  
+    canvas.width = 1500;
+    canvas.height = 1500;
+  
+    const frames = [
+      "{{ 'box-001.png' | asset_url }}",
+      "{{ 'box-002.png' | asset_url }}",
+      "{{ 'box-003.png' | asset_url }}",
+      "{{ 'box-004.png' | asset_url }}",
+      "{{ 'box-005.png' | asset_url }}",
+      "{{ 'box-006.png' | asset_url }}",
+      "{{ 'box-007.png' | asset_url }}",
+      "{{ 'box-008.png' | asset_url }}",
+      "{{ 'box-009.png' | asset_url }}",
+      "{{ 'box-0010.png' | asset_url }}",
+      "{{ 'box-0011.png' | asset_url }}",
+      "{{ 'box-0012.png' | asset_url }}",
+      "{{ 'box-0013.png' | asset_url }}",
+      "{{ 'box-0014.png' | asset_url }}",
+      "{{ 'box-0015.png' | asset_url }}",
+      "{{ 'box-0016.png' | asset_url }}",
+      "{{ 'box-0017.png' | asset_url }}",
+      "{{ 'box-0018.png' | asset_url }}",
+      "{{ 'box-0019.png' | asset_url }}",
+      "{{ 'box-0020.png' | asset_url }}",
+      "{{ 'box-0021.png' | asset_url }}",
+      "{{ 'box-0022.png' | asset_url }}",
+      "{{ 'box-0023.png' | asset_url }}",
+      "{{ 'box-0024.png' | asset_url }}",
+      "{{ 'box-0025.png' | asset_url }}",
+      "{{ 'box-0026.png' | asset_url }}",
+      "{{ 'box-0027.png' | asset_url }}",
+      "{{ 'box-0028.png' | asset_url }}",
+      "{{ 'box-0029.png' | asset_url }}",
+      "{{ 'box-0030.png' | asset_url }}",
+    ];
+  
+    const images = []
+    const airpods = {
+      frame: 1
+    };
+  
+    for (let i = 0; i < frames.length; i++) {
+      let index = i+1;
+      const img = new Image();
+      img.src = frames[index];
+      images.push(img);
+    }
+  
+    gsap.to(airpods, {
+      frame: frames.length - 1,
+      snap: "frame",
+      ease: "none",
+      yoyo: true,
+      scrollTrigger: {
+        trigger: ".hero-container-2",
+        scrub: .2, 
+        pin: true
+      },
+      onUpdate: render
+    });
+  
+    images[0].onload = render;
+  
+    function render() {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(images[airpods.frame -1], 0, 0);
+      
+    }
+  
+  });
+  
+  
+  
